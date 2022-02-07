@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from users.models import Member #models.py
 from .forms import UserRegistrationForm
+from django.contrib import messages
  
 # Create your views here.
 def index(request):
@@ -26,16 +27,16 @@ def home(request):
             context = {'msg': 'Invalid username or password'}
             return render(request, 'login.html', context)
 
-def register(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserRegistrationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
 
-            messages.success(request, 'Your account has been created. You can log in now!')    
-            return redirect('login')
-    else:
-        form = UserRegistrationForm()
+#             messages.success(request, 'Your account has been created. You can log in now!')    
+#             return redirect('login')
+#     else:
+#         form = UserRegistrationForm()
 
-    context = {'form': form}
-    return render(request, 'register.html', context)
+#     context = {'form': form}
+#     return render(request, 'register.html', context)
